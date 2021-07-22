@@ -1,0 +1,18 @@
+.collapse {
+    justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+    .collapse {
+        justify-content: space-around;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .email {
+        display: block;
+    }
+}
