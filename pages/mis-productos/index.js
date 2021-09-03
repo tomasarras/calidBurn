@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import SecondaryButton from "../../components/Buttons/Secondary/SecondaryButton";
 import CustomModal from "../../components/CustomModal/CustomModal";
 import ProductForm from "../../components/ProductForm/ProductForm";
 import ProductList from "../../components/ProductList/ProductList";
@@ -30,8 +31,8 @@ const MyProductsPublished = () => {
   }
 
   return <>
-    <button className="btn btn-outline-primary" onClick={toggleModal}>Crear producto</button>
-    <CustomModal open={modalOpen} toggle={toggleModal} modalTitle="Ingresa los datos del producto">
+    <SecondaryButton onClick={toggleModal}>Crear producto</SecondaryButton>
+    <CustomModal open={modalOpen} toggle={toggleModal} modalTitle="Ingresa los datos del producto" size="lg">
       <ProductForm onSubmit={createProduct}/>
     </CustomModal>
     <ProductList products={products}/>

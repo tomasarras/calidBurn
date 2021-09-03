@@ -5,6 +5,7 @@ import * as imageService from "../services/ImageService";
 export const create = async (product) => {
     API.defaults.headers.common["Authorization"] = token;
     const productCreated = await API.post("/products", product);
+    imageService.uploadSignature(productCreated, product.signature);
     return await imageService.uploadToProduct(productCreated, product.image);
 }
 

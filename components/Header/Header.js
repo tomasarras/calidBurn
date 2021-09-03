@@ -8,15 +8,9 @@ import {
   Navbar,
   NavbarToggler,
   Nav,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Col,
-  Row,
-  Dropdown,
   Container,
 } from "reactstrap";
+import PrimaryButton from "../Buttons/Primary/PrimaryButton";
 
 const Header = () => {
   const { user, logOut } = useContext(UserContext);
@@ -60,6 +54,11 @@ const Header = () => {
                         <a className="nav-link">Mis compras</a>
                       </NavLink>
                     </li>
+                    <li className="nav-item">
+                      <NavLink href="/metamask">
+                        <a className="nav-link">Metamask</a>
+                      </NavLink>
+                    </li>
                   </>
                 )}
               </ul>
@@ -80,13 +79,12 @@ const Header = () => {
               ) : (
                 <>
                   <span className={styles.email}>{user.email}</span>
-                  <button
-                    type="button"
-                    className="mx-2 btn btn-primary"
+                  <PrimaryButton
+                    className="mx-2"
                     onClick={onLogOut}
                   >
                     Cerrar sesion
-                  </button>
+                  </PrimaryButton>
                 </>
               )}
             </div>

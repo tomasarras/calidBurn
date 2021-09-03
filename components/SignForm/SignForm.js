@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./SignForm.module.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,7 +18,7 @@ const SignForm = (props) => {
         await onSubmit(user);
         document.querySelector("#redirect-home").click();
     } catch (err) {
-        console.log(err);
+        console.error(err);
         setError(true);
     }
   };

@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 
 const CustomModal = (props) => {
-  const { children, open, toggle, modalTitle } = props;
+  const { children, open, toggle, modalTitle, size = "sm" } = props;
 
   return (
-    <Modal show={open} onHide={toggle}>
+    <Modal show={open} onHide={toggle} size={size}>
       <Modal.Header closeButton>
         <Modal.Title>{modalTitle}</Modal.Title>
       </Modal.Header>
