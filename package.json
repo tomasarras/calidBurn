@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "css-loader": "^5.2.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
@@ -32,6 +31,7 @@
     "web3": "^1.5.2"
   },
   "devDependencies": {
+    "css-loader": "^5.2.6",
     "eslint": "7.29.0",
     "eslint-config-next": "11.0.1",
     "eslint-plugin-react": "^7.24.0"
