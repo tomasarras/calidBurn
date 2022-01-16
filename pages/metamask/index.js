@@ -1,11 +1,10 @@
 import { useWeb3React } from "@web3-react/core";
 import React from "react";
-import PrimaryButton from "../../components/Buttons/Primary/PrimaryButton";
+import PrimaryButton from "../../components/Buttons/Primary";
 import { injected } from "../../wallet/connectors";
 
 const Metamask = () => {
-  const { active, account, library, connector, activate, deactivate } = useWeb3React();
-
+  const { active, account, activate, deactivate } = useWeb3React();
 
   const connect = async () => {
     try {
@@ -23,17 +22,21 @@ const Metamask = () => {
     }
   };
 
-  return <>
-  <div className="d-flex flex-column justify-content-center align-items-center">
-    <PrimaryButton onClick={connect} className="mb-4">Conectar con metamask</PrimaryButton>
-    {active ?
-    <span className="mb-4">{account}</span>
-    :
-    <span className="mb-4">No conectado</span>
-    }
-    <PrimaryButton onClick={disconnect}>Desconectar metamask</PrimaryButton>
-  </div>
-  </>;
+  return (
+    <>
+      <div className="d-flex flex-column justify-content-center align-items-center">
+        <PrimaryButton onClick={connect} className="mb-4">
+          Conectar con metamask
+        </PrimaryButton>
+        {active ? (
+          <span className="mb-4">{account}</span>
+        ) : (
+          <span className="mb-4">No conectado</span>
+        )}
+        <PrimaryButton onClick={disconnect}>Desconectar metamask</PrimaryButton>
+      </div>
+    </>
+  );
 };
 
 export default Metamask;

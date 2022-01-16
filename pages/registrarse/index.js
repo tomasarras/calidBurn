@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import SignForm from "../../components/SignForm/SignForm";
+import SignForm from "../../components/SignForm";
 import UserContext from "../../contexts/UserContext";
 import * as userService from "../../services/UserService";
 
