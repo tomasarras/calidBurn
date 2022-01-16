@@ -1,0 +1,38 @@
+[
+    {
+      "id": 1,
+      "previewImage": "./products/casa.png",
+      "title":"Av. Triunvirato 3230",
+      "category": "Casa"
+    },
+    {
+      "id": 2,
+      "previewImage": "./products/casa.png",
+      "title":"Av. Triunvirato 3230",
+      "category": "Casa"
+    },
+    {
+      "id": 3,
+      "previewImage": "./products/casa.png",
+      "title":"Av. Triunvirato 3230",
+      "category": "Casa"
+    },
+    {
+      "id": 4,
+      "previewImage": "./products/casa.png",
+      "title":"Av. Triunvirato 3230",
+      "category": "Casa"
+    },
+    {
+      "id": 5,
+      "previewImage": "./products/casa.png",
+      "title":"Av. Triunvirato 3230",
+      "category": "Casa"
+    },
+    {
+      "id": 6,
+      "previewImage": "./products/casa.png",
+      "title":"Av. Triunvirato 3230",
+      "category": "Casa"
+    }
+]

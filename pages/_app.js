@@ -1,8 +1,8 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/globals.css";
-import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
-import Header from "../components/Header/Header";
+import Header from "../components/Header";
 import { UserProvider } from "../contexts/UserContext";
 import { Web3ReactProvider } from "@web3-react/core";
 import Web3 from "web3";
@@ -21,7 +21,9 @@ function MyApp({ Component, pageProps }) {
       <Web3ReactProvider getLibrary={getLibrary}>
         <UserProvider>
           <Header />
-          <Component {...pageProps} />
+          <div className="mt-4">
+            <Component {...pageProps} />
+          </div>
         </UserProvider>
       </Web3ReactProvider>
     </>

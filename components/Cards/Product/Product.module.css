@@ -1,0 +1,10 @@
+.footer {
+    border: none;
+}
+
+.buttonAddCart {
+    all: unset;
+    padding: 3% 23%;
+    border-radius: 30px;
+    background-color: #F3F2F7;
+}

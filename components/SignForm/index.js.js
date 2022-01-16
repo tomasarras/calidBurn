@@ -15,11 +15,11 @@ const SignForm = (props) => {
     const password = document.querySelector("#inputPassword").value;
     const user = { username, password };
     try {
-        await onSubmit(user);
-        document.querySelector("#redirect-home").click();
+      await onSubmit(user);
+      document.querySelector("#redirect-home").click();
     } catch (err) {
-        console.error(err);
-        setError(true);
+      console.error(err);
+      setError(true);
     }
   };
 
@@ -71,11 +71,11 @@ const SignForm = (props) => {
                     Remember password
                   </label>
                 </div>
-                {error &&
-                    <div className="alert alert-danger" role="alert">
-                        {errorText}
-                    </div>
-                }
+                {error && (
+                  <div className="alert alert-danger" role="alert">
+                    {errorText}
+                  </div>
+                )}
 
                 <button
                   className={`${styles.button} btn btn-lg btn-primary btn-block text-uppercase w-100`}
@@ -100,7 +100,9 @@ const SignForm = (props) => {
                   in with Facebook
                 </button>
               </form>
-              <Link href="/"><a hidden id="redirect-home"/></Link>
+              <Link href="/">
+                <a hidden id="redirect-home" />
+              </Link>
             </div>
           </div>
         </div>

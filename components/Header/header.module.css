@@ -2,6 +2,15 @@
     justify-content: space-between;
 }
 
+.textWhiteHover:hover {
+    color: white;
+}
+
+.walletBtn {
+    all: unset;
+    color: white;
+}
+
 @media (max-width: 991px) {
     .collapse {
         justify-content: space-around;

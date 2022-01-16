@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
-import ProductList from '../components/ProductList/ProductList'
-import * as productService from "../services/ProductService";
+import React from "react";
+import { Container } from "react-bootstrap";
+import Payments from "../components/Payments";
+import SwiperCatalogs from "../components/Swipers/Catalogs";
+import SwiperHome from "../components/Swipers/Home";
+import SwiperOffers from "../components/Swipers/Offers";
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const newProducts = await productService.getAllByPageAndSize(0, 10);
-      setProducts(newProducts);
-    }
+  return (
+    <Container className="text-white mb-4">
+      <SwiperHome />
 
-    fetchData();
-  }, [])
+      <h3 className="my-4">Elegí como pagar</h3>
+      <Payments/>
 
-  return (<>
-    <ProductList products={products}/>
-    </>
-  )
+      <h3 className="my-4">Ofertas</h3>
+      <SwiperOffers/>
+
+      <h3 className="my-4">Catálogos</h3>
+      <SwiperCatalogs/>
+    </Container>
+  );
 }

@@ -1,0 +1,9 @@
+.container {
+    padding: 2% 7%;
+}
+
+.logoContainer {
+    border: 1px solid #DDDDDD;
+    width: 90px;
+    height: 90px;
+}
