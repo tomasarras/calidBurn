@@ -1,0 +1,23 @@
+.inputComplete {
+  width: 10%;
+  height: 33px;
+}
+
+.inputTokens {
+  width: 15%;
+}
+
+.dropzone {
+  width: 100%;
+  border: 2px dashed #c5c5c5;
+  border-radius: 5px;
+}
+
+.browseFiles {
+  cursor: pointer;
+  color: #c36;
+}
+
+.browseFiles:hover {
+  color: #000000;
+}

@@ -6,7 +6,7 @@ const ProductCard = (props) => {
   const { previewImage, title, category } = props;
 
   return (
-    <Card style={{ width: '255px', height: '380px' }} className="text-black">
+    <Card style={{ width: '255px', height: '450px' }} className="text-black">
       <Card.Img className="p-2" variant="top" src={previewImage} />
       <Card.Body>
         <Card.Title>{title}</Card.Title>

@@ -1,0 +1,31 @@
+.container {
+  background-color: #cad7ff;
+}
+
+.container .container {
+  width: 60%;
+}
+
+@media (max-width: 750px) {
+  .container .container {
+    width: 100%;
+  } 
+}
+
+.card {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  border-color: #00fff2;
+  border-width: 10px;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.description {
+  font-size: 16px;
+  font-weight: 400;
+}

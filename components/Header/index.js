@@ -1,12 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useContext } from "react";
 import { Container, Dropdown, Navbar } from "react-bootstrap";
 import Search from "../Search";
 import styles from "./Header.module.css";
 import {faAngleDown} from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link'
+import ButtonMetamask from "../Buttons/Metamask";
+import UserContext from "../../contexts/UserContext";
 
 const Header = () => {
+  const { user, logOut } = useContext(UserContext);
   const CustomToggle = forwardRef(({ children, onClick }, ref) => (
     <span
       role="button"
@@ -25,7 +28,7 @@ const Header = () => {
   ));
 
   CustomToggle.displayName = "CustomToggle";
-
+  
   const CustomMenu = forwardRef(
     ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
 
@@ -57,7 +60,7 @@ const Header = () => {
       <Navbar className="bg-transparent">
         <Container>
           <div className="d-flex w-100 text-white">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/">
               <img
                 alt="logo"
                 src="/Logo_calidBurn.png"
@@ -70,9 +73,11 @@ const Header = () => {
                 <div className="w-75">
                   <Search />
                 </div>
-                <button className={`${styles.walletBtn} me-4`}>
-                  Conectar billetera
-                </button>
+                <ButtonMetamask
+                  className={`${styles.walletBtn} me-4`}
+                  connectLabel="Conectar billetera"
+                  disconnectLabel="Desconectar billetera"
+                />
               </div>
 
               <div className="mt-3 d-flex justify-content-between w-100">
@@ -82,24 +87,26 @@ const Header = () => {
                       Categorías
                     </Dropdown.Toggle>
 
-                    {/* <Dropdown.Menu as={CustomMenu}>
-                      <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">
-                        Another action
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">
-                        Something else
-                        </Dropdown.Item>
-                      </Dropdown.Menu> */}
+                    <Dropdown.Menu as={CustomMenu}>
+                      <Dropdown.Item href="#">Casas</Dropdown.Item>
+                      <Dropdown.Item href="#">Autos</Dropdown.Item>
+                      <Dropdown.Item href="#">Motos</Dropdown.Item>
+                      <Dropdown.Item href="#">Otros</Dropdown.Item>
+                    </Dropdown.Menu>
                   </Dropdown>
 
                   <NavItem title="La tokenizacion"/>
-                  <NavItem title="Vender"/>
+                  {user &&
+                    <NavItem title="Vender" href="/vender-aviso"/>
+                  }
                 </div>
                 
                 <div className="d-flex">
-                  <NavItem title="Creá tu cuenta"/>
-                  <NavItem title="Ingresá"/>
+                  {user ? <span role="button" className="cursor-pointer" onClick={logOut}>Cerrar sesion</span>
+                    : <>
+                      <NavItem title="Creá tu cuenta" href="/registrarse"/>
+                      <NavItem title="Ingresá" href="/iniciar-sesion"/>
+                    </>}
                 </div>
               </div>
             </div>

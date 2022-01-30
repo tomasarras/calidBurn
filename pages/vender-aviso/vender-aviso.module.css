@@ -1,0 +1,26 @@
+.warningTitle {
+  color: #12205B;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.warningDescription {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.card {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  border-color: #00FFF2;
+  border-width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10%;
+}
+
+.card .cardBody {
+  padding: 2rem;
+}

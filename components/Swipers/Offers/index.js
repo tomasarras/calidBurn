@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/bundle";
 
 import ProductCard from "../../Cards/Product";
-import products from "../../../mockData/products.json";
+import { getAllByPageAndSize } from "../../../services/ProductService";
 const SwiperOffers = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await getAllByPageAndSize(0, 99);
+      setProducts(products);
+    };
+    fetchProducts();
+  }, []);
+  
 
   return (
     <Swiper
@@ -15,7 +25,7 @@ const SwiperOffers = () => {
     >
       {products.map(product => 
         <SwiperSlide key={product.id}>
-          <ProductCard previewImage={product.previewImage} title={product.title} category={product.category}/>
+          <ProductCard previewImage={product.path} title={product.name} category={product.description}/>
         </SwiperSlide>
       )}
     </Swiper>

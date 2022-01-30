@@ -1,0 +1,12 @@
+.spanSteps {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.container {
+  background-color: #12205B;
+}
+
+.container .container {
+  padding: 9% 0;
+}

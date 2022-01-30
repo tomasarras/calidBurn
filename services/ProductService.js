@@ -5,8 +5,10 @@ import * as imageService from "../services/ImageService";
 export const create = async (product) => {
     API.defaults.headers.common["Authorization"] = token;
     const productCreated = await API.post("/products", product);
-    imageService.uploadSignature(productCreated, product.signature);
-    return await imageService.uploadToProduct(productCreated, product.image);
+    if (product.signature)
+        imageService.uploadSignature(productCreated, product.signature);
+    await imageService.uploadToProduct(productCreated, product.image)
+    return productCreated;
 }
 
 export const getAllByPageAndSize = async (page, size) => {
@@ -40,4 +42,9 @@ export const isPurchased = async (id) => {
 export const getPurchased = async (page, size) => {
     API.defaults.headers.common["Authorization"] = token;
     return await API.get(`/products/purchased?page=${page}&size=${size}`);
+};
+
+export const editById = async (id, product) => {
+    API.defaults.headers.common["Authorization"] = token;
+    return await API.put(`/products/${id}`, product);
 };

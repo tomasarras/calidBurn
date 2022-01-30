@@ -1,0 +1,10 @@
+.button {
+  all: unset;
+  background-color: #5691FF;
+  border-radius: 7px;
+  padding: 10px 26px;
+}
+
+.linkBtn:hover, .button {
+  color: white;
+}
