@@ -136,24 +136,24 @@ const Vender = () => {
     await transaction.wait();
   };
 
-  const onBuyNFT = async (nft) => {
-    const nftAddress = process.env.NEXT_PUBLIC_NFT_ADDRESS_CONTRACT;
-    const nftMarketAddress = process.env.NEXT_PUBLIC_NFTMARKET_ADDRESS_CONTRACT;
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(nftMarketAddress, MarketAbi ,signer);
-    let priceWei = null;
-    if (typePrice === "eth") {
-      priceWei = ethers.utils.parseEther(price);
-    } else {
-      priceWei = price;
-    }
+  // const onBuyNFT = async (nft) => {
+  //   const nftAddress = process.env.NEXT_PUBLIC_NFT_ADDRESS_CONTRACT;
+  //   const nftMarketAddress = process.env.NEXT_PUBLIC_NFTMARKET_ADDRESS_CONTRACT;
+  //   const web3Modal = new Web3Modal();
+  //   const connection = await web3Modal.connect();
+  //   const provider = new ethers.providers.Web3Provider(connection);
+  //   const signer = provider.getSigner();
+  //   const contract = new ethers.Contract(nftMarketAddress, MarketAbi ,signer);
+  //   let priceWei = null;
+  //   if (typePrice === "eth") {
+  //     priceWei = ethers.utils.parseEther(price);
+  //   } else {
+  //     priceWei = price;
+  //   }
 
-    const transaction = await contract.createMarketSale(nftAddress, nft.tokenId, { value: priceWei });
-    await transaction.wait();
-  };
+  //   const transaction = await contract.createMarketSale(nftAddress, nft.tokenId, { value: priceWei });
+  //   await transaction.wait();
+  // };
   
 
   const dataURLtoFile = (dataurl, filename) => {
