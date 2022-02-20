@@ -1,11 +1,18 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import ContainerSell from "../../components/Container/Sell";
 import HeaderSell from "../../components/Header/SellHeader";
+
 
 const VentaTerminada = () => {
   const router = useRouter();
   const { hash } = router.query;
+
+  
+
+  useEffect(() => {
+  }, [hash])
+  
   
   return (<>
     <HeaderSell title="Requisitos Para Tokenizar Escritura"/>
