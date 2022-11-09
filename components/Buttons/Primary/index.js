@@ -11,7 +11,7 @@ const PrimaryButton = (props) => {
       onClick={onClick}
     >
       {href !== ""
-        ? <Link href={href} ><a className={styles.linkBtn}>{children}</a></Link>
+        ? <Link legacyBehavior href={href} ><a className={styles.linkBtn}>{children}</a></Link>
         : children
       }
     </button>

@@ -13,7 +13,7 @@ const Payments = () => {
         <div className="d-flex flex-column">
           <span>{name}</span>
           <div>
-            <Link href={href}><a className="text-primary">Ver más</a></Link>
+            <Link legacyBehavior href={href}><a className="text-primary">Ver más</a></Link>
           </div>
         </div>
       </div>

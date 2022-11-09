@@ -100,7 +100,7 @@ const SignForm = (props) => {
                   in with Facebook
                 </button>
               </form>
-              <Link href="/">
+              <Link legacyBehavior href="/">
                 <a hidden id="redirect-home" />
               </Link>
             </div>

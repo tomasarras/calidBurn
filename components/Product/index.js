@@ -19,7 +19,7 @@ const Product = (props) => {
         <p className="card-text">
           {product.description}
         </p>
-        <Link href={`/productos/${product.name.replace(/\s+/g, '-').toLowerCase()}-${product.id}`}>
+        <Link legacyBehavior href={`/productos/${product.name.replace(/\s+/g, '-').toLowerCase()}-${product.id}`}>
           <a className="btn btn-primary w-100">
             Ver mas
           </a>

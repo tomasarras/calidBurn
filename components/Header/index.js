@@ -51,7 +51,7 @@ const Header = () => {
 
   const NavItem = ({ title, href = "#" }) => (
     <div className="ms-2">
-      <Link href={href}><a className="text-white-hover">{title}</a></Link>
+      <Link legacyBehavior href={href}><a className="text-white-hover">{title}</a></Link>
     </div>
   );
 

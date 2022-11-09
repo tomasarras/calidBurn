@@ -9,11 +9,11 @@ import { getById, editById } from "../../services/ProductService";
 import { uploadSignature } from "../../services/ImageService";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import PDFProduct from "../../components/ProductForm/PDFProduct";
-import { create } from 'ipfs-http-client';
 import Web3Modal from "web3modal";
 import { ethers } from 'ethers';
 import NFTAbi from "../../contracts/abis/NFT.json";
 import MarketAbi from "../../contracts/abis/CalidBurnMarket.json";
+import { Web3Storage } from "web3.storage";
 
 const Vender = () => {
   const canvas = useRef();
@@ -23,7 +23,7 @@ const Vender = () => {
   const [typePrice, setTypePrice] = useState("wei");
   const [productObj, setProductObj] = useState(null);
   const [data, setData] = useState(null);
-  const ipfs = create("https://ipfs.infura.io:5001/api/v0");
+  const [clientIpfs, setClientIpfs] = useState(null);
   const [hash, setHash] = useState("");
   const [imgFile, setImgFile] = useState(null);
   const [localUrl, setLocalUrl] = useState("");
@@ -70,20 +70,21 @@ const Vender = () => {
         const blob = new Blob([pdf], { type: 'application/pdf' });
         const file = new File([blob], "product.pdf");
         download(blob);
-        
-        const responsePDF = await ipfs.add(file);
-        const responseIMG = await ipfs.add(imgFile);
+        const cidPdfImg = await clientIpfs.put([file, imgFile]);
 
-        const pdfURL = process.env.NEXT_PUBLIC_IPFS_GET_FILE + responsePDF.path;
-        const imgURL = process.env.NEXT_PUBLIC_IPFS_GET_FILE + responseIMG.path;
+        const pdfURL = `http://${cidPdfImg}.ipfs.w3s.link/product.pdf`;
+        const imgURL = `http://${cidPdfImg}.ipfs.w3s.link/img.jpg`;
         const metadata = {
           name: data.name,
           description: data.description,
           pdfURL,
           image: imgURL,
         };
-        const responseMetadata = await ipfs.add(JSON.stringify(metadata));
-        const tokenURI = process.env.NEXT_PUBLIC_IPFS_GET_FILE + responseMetadata.path;
+
+        const metadataBlob = new Blob([JSON.stringify(metadata)], { type: 'application/json' });
+        const cidMetadata = await clientIpfs.put([new File([metadataBlob], 'metadata.json')]);
+        const tokenURI = `http://${cidMetadata}.ipfs.w3s.link/metadata.json`;
+        console.log("Token URL: " + tokenURI);
         setHash(tokenURI);
       }
     }
@@ -111,6 +112,18 @@ const Vender = () => {
       //router.push("/vender/venta-terminada?hash=" + hash);
   }, [hash]);
 
+  useEffect(() => {
+    setClientIpfs(makeStorageClient());
+  }, []);
+
+  const getAccessToken = () => {
+    return process.env.NEXT_PUBLIC_WEB3_STORAGE_ACCESS_TOKEN;
+  }
+
+  const makeStorageClient = () => {
+    return new Web3Storage({ token: getAccessToken() })
+  }
+
   const onGetHash = async (hash) => {
     const nftAddress = process.env.NEXT_PUBLIC_NFT_ADDRESS_CONTRACT;
     const nftMarketAddress = process.env.NEXT_PUBLIC_NFTMARKET_ADDRESS_CONTRACT;
@@ -120,7 +133,9 @@ const Vender = () => {
     const signer = provider.getSigner();
     let contract = new ethers.Contract(nftAddress, NFTAbi, signer);
     let transaction = await contract.createToken(hash);
+    console.log("transaction ",transaction);
     const tx = await transaction.wait();
+    console.log("tx ", tx);
     let priceWei = null;
     if (typePrice === "eth") {
       priceWei = ethers.utils.parseEther(price);
@@ -129,11 +144,16 @@ const Vender = () => {
     }
 
     const event = tx.events[0];
+    console.log("event ", event);
     const value = event.args[2];
+    console.log("value ", value);
     const tokenId = value.toNumber();
     contract = new ethers.Contract(nftMarketAddress, MarketAbi, signer);
+    console.log("contract ", contract);
     transaction = await contract.createMarketItem(nftAddress, tokenId, priceWei, parts);
-    await transaction.wait();
+    console.log("transaction ", transaction);
+    const txx = await transaction.wait();
+    console.log("txx " ,txx);
   };
 
   // const onBuyNFT = async (nft) => {

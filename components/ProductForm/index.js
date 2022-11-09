@@ -5,6 +5,7 @@ import PrimaryButton from "../Buttons/Primary/PrimaryButton";
 import PDFProduct from "./PDFProduct";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { create } from 'ipfs-http-client';
+import { Web3Storage } from 'web3.storage'
 
 const ProductForm = () => {
   const inputImage = useRef();
@@ -12,7 +13,8 @@ const ProductForm = () => {
   const [data, setData] = useState(false);
   const { register, handleSubmit } = useForm();
   const [created, setCreated] = useState(false);
-  const ipfs = create("https://ipfs.infura.io:5001/api/v0");
+  
+  const clientIpfs = makeStorageClient();
   const [hash, setHash] = useState("");
 
   const clearCanvas = (e) => {
@@ -33,23 +35,24 @@ const ProductForm = () => {
         window.first = true;
         const blob = new Blob([pdf], { type: 'application/pdf' });
         const file = new File([blob], "product.pdf");
-        download(blob);
+        //download(blob);
         
-        const responsePDF = await ipfs.add(file);
-        const responseIMG = await ipfs.add(data.image);
+        const responsePDF = await clientIpfs.put(file);
+        console.log(responsePDF);
+        // const responseIMG = await clientIpfs.put(data.image);
 
-        const pdfURL = process.env.NEXT_PUBLIC_IPFS_GET_FILE + responsePDF.path;
-        const imgURL = process.env.NEXT_PUBLIC_IPFS_GET_FILE + responseIMG.path;
-        const metadata = {
-          name: data.name,
-          description: data.description,
-          pdfURL,
-          imgURL,
-        };
-        const responseMetadata = await ipfs.add(JSON.stringify(metadata));
-        const tokenURI = process.env.NEXT_PUBLIC_IPFS_GET_FILE + responseMetadata.path;
-        setHash(tokenURI);
-        setCreated(true);
+        // const pdfURL = process.env.NEXT_PUBLIC_IPFS_GET_FILE + responsePDF.path;
+        // const imgURL = process.env.NEXT_PUBLIC_IPFS_GET_FILE + responseIMG.path;
+        // const metadata = {
+        //   name: data.name,
+        //   description: data.description,
+        //   pdfURL,
+        //   imgURL,
+        // };
+        // const responseMetadata = await ipfs.add(JSON.stringify(metadata));
+        // const tokenURI = process.env.NEXT_PUBLIC_IPFS_GET_FILE + responseMetadata.path;
+        // setHash(tokenURI);
+        // setCreated(true);
       }
     }
 
@@ -73,6 +76,14 @@ const ProductForm = () => {
     }
     return new File([u8arr], filename, {type:mime});
   };
+
+  const getAccessToken = () => {
+    return process.env.NEXT_PUBLIC_WEB3_STORAGE_ACCESS_TOKEN;
+  }
+
+  const makeStorageClient = () => {
+    return new Web3Storage({ token: getAccessToken() })
+  }
 
   return (<>
     <form onSubmit={handleSubmit(handleOnSubmit)}>
